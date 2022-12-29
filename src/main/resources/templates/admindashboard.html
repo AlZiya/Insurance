@@ -10,6 +10,11 @@
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
     <title>Admin Dashboard</title>
+    <style>
+        .navbar-nav {
+            margin-left: auto;
+        }
+    </style>
 </head>
 <body>
 
@@ -24,17 +29,12 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link " th:href="@{/adminApproved}">Approved Proposals</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
+                    <a class="nav-link" th:href="@{/adminCancelled}">Cancelled Proposals</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" th:href="@{/logout}">Log out</a>
                 </li>
@@ -43,15 +43,7 @@
     </div>
 </nav>
 
-<div class="btn-group">
-    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        Action
-    </button>
-    <ul class="dropdown-menu">
-        <li><a class="dropdown-item" th:href="@{/adminApproved}">Approved Proposals</a></li>
-        <li><a class="dropdown-item" th:href="@{/adminCancelled}">Cancelled Proposals</a></li>
-    </ul>
-</div>
+
 
 <h3>Pending Proposal</h3>
 

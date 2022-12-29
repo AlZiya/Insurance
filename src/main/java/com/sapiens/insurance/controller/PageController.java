@@ -127,4 +127,9 @@ public class PageController {
         return "appliedProposal";
     }
 
+    @GetMapping("/payment")
+    public String getPaymentPage(){
+        return "payment";
+    }
+
 }
