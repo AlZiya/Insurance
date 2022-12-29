@@ -78,9 +78,22 @@ public class PageController {
 
     @PostMapping("/submitProposal")
     public String submitProposal(@ModelAttribute Proposal proposal, Authentication authentication) {
+        System.out.println(proposal);
         UserAuthDetails details = (UserAuthDetails) authentication.getPrincipal();
         proposal.setSubmittedBy(details.getUsername());
         ResponseEntity response = userService.submitProposal(proposal);
+        if (response.getStatusCode().is2xxSuccessful())
+            return "redirect:/dashboard";
+        return "dashboard";
+    }
+
+    @PostMapping("/submitProposalv1")
+    public String submitProposal(@ModelAttribute Proposal proposal, Authentication authentication, @RequestParam long id) {
+        System.out.println(proposal);
+        Proposal response1 = proposalRepository.getById(id);
+        UserAuthDetails details = (UserAuthDetails) authentication.getPrincipal();
+        response1.setSubmittedBy(details.getUsername());
+        ResponseEntity response = userService.submitProposal(response1);
         if (response.getStatusCode().is2xxSuccessful())
             return "redirect:/dashboard";
         return "dashboard";
@@ -127,8 +140,10 @@ public class PageController {
         return "appliedProposal";
     }
 
-    @GetMapping("/payment")
-    public String getPaymentPage(){
+    @PostMapping("/payment")
+    public String getPaymentPage(@ModelAttribute Proposal proposal, Model model) {
+        Proposal response = proposalRepository.save(proposal);
+        model.addAttribute("proposal", response);
         return "payment";
     }
 
