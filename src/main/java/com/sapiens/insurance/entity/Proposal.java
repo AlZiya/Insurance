@@ -6,10 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
@@ -42,6 +39,12 @@ public class Proposal {
     private int status;
     private String submittedBy;
     private String policyNumber;
+    private double premium;
+    private boolean topUp;
+    private boolean accidentalCover;
+    private double accidentalDeathCover;
+    private boolean care;
+    private double comprehensiveCare;
 
 }
 //For term insurance, obtain the input like First name & Last name, DOB, E-Mail id, mobile number, gender, do you consume tobacco?
