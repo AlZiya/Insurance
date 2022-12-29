@@ -7,7 +7,6 @@ import com.sapiens.insurance.repository.ProposalRepository;
 import com.sapiens.insurance.repository.UserRepository;
 import com.sapiens.insurance.service.PolicyNumberSeqService;
 import com.sapiens.insurance.service.UserService;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -90,9 +89,10 @@ public class PageController {
     @GetMapping("/proposalStatus")
     public String proposalStatus(@RequestParam int status, @RequestParam long id) {
         int response = proposalRepository.updateStatus(status, id);
-        if (status == 2){
+        if (status == 2) {
             proposalRepository.updatePolicyNumber(id, policyNumberSeqService.getPolicyNumber());
-            return "redirect:/adminApproved";}
+            return "redirect:/adminApproved";
+        }
         return "redirect:/adminCancelled";
     }
 
@@ -110,20 +110,20 @@ public class PageController {
     }
 
     @PostMapping("/proposalUpdate")
-    public String proposalUpdate(@ModelAttribute Proposal proposal){
+    public String proposalUpdate(@ModelAttribute Proposal proposal) {
         Proposal temp = proposalRepository.getById(proposal.getId());
         proposal.setStatus(temp.getStatus());
         proposal.setSubmittedBy(temp.getSubmittedBy());
-       Proposal response =  proposalRepository.save(proposal);
-       return "redirect:/adminDashboard";
+        Proposal response = proposalRepository.save(proposal);
+        return "redirect:/adminDashboard";
     }
 
     @GetMapping("/appliedProposals")
-    public String appliedProposals(Model model,Authentication authentication){
+    public String appliedProposals(Model model, Authentication authentication) {
         UserAuthDetails details = (UserAuthDetails) authentication.getPrincipal();
         System.out.println(details.getUsername());
         List<Proposal> proposals = proposalRepository.getBySubmittedBy(details.getUsername());
-        model.addAttribute("proposals",proposals);
+        model.addAttribute("proposals", proposals);
         return "appliedProposal";
     }
 

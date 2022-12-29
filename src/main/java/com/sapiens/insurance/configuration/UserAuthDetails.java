@@ -5,7 +5,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.security.Principal;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -15,7 +14,7 @@ public class UserAuthDetails implements UserDetails {
     private User user;
 
     public UserAuthDetails(User user) {
-       // super();
+        // super();
         this.user = user;
     }
 
@@ -56,7 +55,7 @@ public class UserAuthDetails implements UserDetails {
         return true;
     }
 
-    public String getFname(){
+    public String getFname() {
         return user.getFirstName();
     }
 

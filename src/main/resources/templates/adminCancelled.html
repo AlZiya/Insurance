@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
@@ -58,67 +55,62 @@
 </div>
 
 
+<h3>Cancelled Proposals Users</h3>
 
-    <h3>Cancelled Proposals Users</h3>
+<hr/>
 
-    <hr/>
+<table class="table table-bordered table-striped">
 
-    <table class="table table-bordered table-striped">
-
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Gender</th>
-            <th>Policy Type</th>
-            <th>Date of Birth</th>
-            <th>Do you consume tobacco</th>
-            <th>Annual Income </th>
-            <th>Life Cover Amount</th>
-            <th>Life Cover up to age</th>
-            <th>Status</th>
-            <th>Submitted by</th>
-
-
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.firstName}" />
-            <td th:text="${user.lastName}" />
-            <td th:text="${user.email}" />
-            <td th:text="${user.mobile}" />
-            <td>
-                <span th:if="${user.gender == 1}">Male</span>
-                <span th:if="${user.gender == 2}">Female</span>
-                <span th:if="${user.gender == 3}">Other</span>
-
-            </td>
-            <td th:text="${user.type}" />
-            <td th:text="${user.dob}" />
-            <td th:text="${user.tobaccoConsumption}" />
-            <td th:text="${user.annualIncome}" />
-            <td th:text="${user.lifeCoverAmount}" />
-            <td th:text="${user.age}" />
-            <td>
-                <span th:if="${user.status == 1}">In Progress</span>
-                <span th:if="${user.status == 2}">Approved</span>
-                <span th:if="${user.status == 3}">Cancelled</span>
-
-            </td>
-
-            <td th:text="${user.submittedBy}" />
-
-        </tr>
-        </tbody>
-
-    </table>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Gender</th>
+        <th>Policy Type</th>
+        <th>Date of Birth</th>
+        <th>Do you consume tobacco</th>
+        <th>Annual Income</th>
+        <th>Life Cover Amount</th>
+        <th>Life Cover up to age</th>
+        <th>Status</th>
+        <th>Submitted by</th>
 
 
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.firstName}"/>
+        <td th:text="${user.lastName}"/>
+        <td th:text="${user.email}"/>
+        <td th:text="${user.mobile}"/>
+        <td>
+            <span th:if="${user.gender == 1}">Male</span>
+            <span th:if="${user.gender == 2}">Female</span>
+            <span th:if="${user.gender == 3}">Other</span>
 
+        </td>
+        <td th:text="${user.type}"/>
+        <td th:text="${user.dob}"/>
+        <td th:text="${user.tobaccoConsumption}"/>
+        <td th:text="${user.annualIncome}"/>
+        <td th:text="${user.lifeCoverAmount}"/>
+        <td th:text="${user.age}"/>
+        <td>
+            <span th:if="${user.status == 1}">In Progress</span>
+            <span th:if="${user.status == 2}">Approved</span>
+            <span th:if="${user.status == 3}">Cancelled</span>
 
+        </td>
+
+        <td th:text="${user.submittedBy}"/>
+
+    </tr>
+    </tbody>
+
+</table>
 
 
 </body>

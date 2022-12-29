@@ -16,7 +16,7 @@ import javax.validation.constraints.Min;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class PolicyNumberSequence{
+public class PolicyNumberSequence {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
