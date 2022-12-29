@@ -6,7 +6,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.time.LocalDate;
@@ -28,14 +31,14 @@ public class Proposal {
     private String type;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
-    private boolean tobaccoConsumption ;
-    private double annualIncome ;
+    private boolean tobaccoConsumption;
+    private double annualIncome;
     @Max(30000000)
     @Min(0)
-    private  double lifeCoverAmount ;
+    private double lifeCoverAmount;
     @Max(100)
     @Min(1)
-    private  int age ;
+    private int age;
     private int status;
     private String submittedBy;
     private String policyNumber;

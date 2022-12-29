@@ -1,6 +1,3 @@
-
-
-
 <!doctype html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
 <head>
@@ -56,78 +53,77 @@
     </ul>
 </div>
 
-    <h3>Pending Proposal</h3>
+<h3>Pending Proposal</h3>
 
-    <hr/>
+<hr/>
 
-    <table class="table table-bordered table-striped">
+<table class="table table-bordered table-striped">
 
-        <thead>
-        <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>Email</th>
-            <th>Mobile</th>
-            <th>Gender</th>
-            <th>Policy Type</th>
-            <th>Date of Birth</th>
-            <th>Do you consume tobacco</th>
-            <th>Annual Income </th>
-            <th>Life Cover Amount</th>
-            <th>Life Cover up to age</th>
-            <th>Status</th>
-            <th>Submitted by</th>
-            <th>Action</th>
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Mobile</th>
+        <th>Gender</th>
+        <th>Policy Type</th>
+        <th>Date of Birth</th>
+        <th>Do you consume tobacco</th>
+        <th>Annual Income</th>
+        <th>Life Cover Amount</th>
+        <th>Life Cover up to age</th>
+        <th>Status</th>
+        <th>Submitted by</th>
+        <th>Action</th>
 
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user: ${users}">
-            <td th:text="${user.firstName}" />
-            <td th:text="${user.lastName}" />
-            <td th:text="${user.email}" />
-            <td th:text="${user.mobile}" />
-            <td>
-                <span th:if="${user.gender == 1}">Male</span>
-                <span th:if="${user.gender == 2}">Female</span>
-                <span th:if="${user.gender == 3}">Other</span>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${users}">
+        <td th:text="${user.firstName}"/>
+        <td th:text="${user.lastName}"/>
+        <td th:text="${user.email}"/>
+        <td th:text="${user.mobile}"/>
+        <td>
+            <span th:if="${user.gender == 1}">Male</span>
+            <span th:if="${user.gender == 2}">Female</span>
+            <span th:if="${user.gender == 3}">Other</span>
 
-            </td>
-            <td th:text="${user.type}" />
-            <td th:text="${user.dob}" />
-            <td th:text="${user.tobaccoConsumption}" />
-            <td th:text="${user.annualIncome}" />
-            <td th:text="${user.lifeCoverAmount}" />
-            <td th:text="${user.age}" />
-            <td>
-                <span th:if="${user.status == 1}">In Progress</span>
-                <span th:if="${user.status == 2}">Approved</span>
-                <span th:if="${user.status == 3}">Cancelled</span>
+        </td>
+        <td th:text="${user.type}"/>
+        <td th:text="${user.dob}"/>
+        <td th:text="${user.tobaccoConsumption}"/>
+        <td th:text="${user.annualIncome}"/>
+        <td th:text="${user.lifeCoverAmount}"/>
+        <td th:text="${user.age}"/>
+        <td>
+            <span th:if="${user.status == 1}">In Progress</span>
+            <span th:if="${user.status == 2}">Approved</span>
+            <span th:if="${user.status == 3}">Cancelled</span>
 
-            </td>
-            <td th:text="${user.submittedBy}" />
-            <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                        Action
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" th:href="@{/proposalStatus?status=2&id={pid}(pid=${user.id})}">Approve</a></li>
-                        <li><a class="dropdown-item" th:href="@{/proposalStatus?status=3&id={pid}(pid=${user.id})}">Cancel</a></li>
-                        <li><a class="dropdown-item" th:href="@{/proposalUpdatePage/{pid}(pid=${user.id})}">Update</a></li>
-                        <li><a class="dropdown-item" th:href="@{/deleteProposal?id={pid}(pid=${user.id})}">Delete</a></li>
-                    </ul>
-                </div>
+        </td>
+        <td th:text="${user.submittedBy}"/>
+        <td>
+            <div class="btn-group">
+                <button type="button" class="btn btn-dark dropdown-toggle" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                    Action
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item"
+                           th:href="@{/proposalStatus?status=2&id={pid}(pid=${user.id})}">Approve</a></li>
+                    <li><a class="dropdown-item"
+                           th:href="@{/proposalStatus?status=3&id={pid}(pid=${user.id})}">Cancel</a></li>
+                    <li><a class="dropdown-item" th:href="@{/proposalUpdatePage/{pid}(pid=${user.id})}">Update</a></li>
+                    <li><a class="dropdown-item" th:href="@{/deleteProposal?id={pid}(pid=${user.id})}">Delete</a></li>
+                </ul>
+            </div>
 
-            </td>
-        </tr>
-        </tbody>
+        </td>
+    </tr>
+    </tbody>
 
-    </table>
-
-
-
-
+</table>
 
 
 </body>

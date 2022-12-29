@@ -27,31 +27,32 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResponseEntity registerUser(User user) {
-        if (user.getRole()==null)
+        if (user.getRole() == null)
             user.setRole("USER");
         if (user.getDob().isAfter(LocalDate.now()))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        if (user.getMobile()<6000000000l || user.getMobile()>9999999999l)
+        if (user.getMobile() < 6000000000l || user.getMobile() > 9999999999l)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
-        User response= userRepository.save(user);
-        if (response==null)
+        User response = userRepository.save(user);
+        if (response == null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity(response,HttpStatus.OK);
+        return new ResponseEntity(response, HttpStatus.OK);
     }
 
-    public ResponseEntity submitProposal(Proposal proposal){
+    public ResponseEntity submitProposal(Proposal proposal) {
         if (proposal.getDob().isAfter(LocalDate.now()))
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        if (proposal.getMobile()<6000000000l || proposal.getMobile()>9999999999l)
+        if (proposal.getMobile() < 6000000000l || proposal.getMobile() > 9999999999l)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
         proposal.setStatus(1);
         Proposal response = proposalRepository.save(proposal);
-        if (response==null)
+        if (response == null)
             return new ResponseEntity(HttpStatus.BAD_REQUEST);
-        return new ResponseEntity(response,HttpStatus.OK);
-    };
+        return new ResponseEntity(response, HttpStatus.OK);
+    }
 
+    ;
 
 
 }
