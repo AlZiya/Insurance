@@ -45,6 +45,9 @@ public class Proposal {
     private double accidentalDeathCover;
     private boolean care;
     private double comprehensiveCare;
+    @Min(5)
+    private int paymentTenure;
+    private int paymentFreq;
 
 }
 //For term insurance, obtain the input like First name & Last name, DOB, E-Mail id, mobile number, gender, do you consume tobacco?

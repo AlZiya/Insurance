@@ -140,6 +140,7 @@
           class="form-select"
           aria-label="Select Policy Type"
           th:field="*{type}"
+          id="type"
         >
           <option value="Term insurance" selected>Term Insurance Policy</option>
           <option value="Whole Life insurance Policy">
@@ -159,6 +160,7 @@
           aria-label="Date of Birth"
           aria-describedby="basic-addon1"
           th:field="*{dob}"
+          id="dob"
         />
       </div>
 
@@ -183,6 +185,7 @@
           aria-label="Life Cover"
           aria-describedby="basic-addon1"
           th:field="*{lifeCoverAmount}"
+          id="lifeCoverAmount"
         />
       </div>
 
@@ -197,7 +200,41 @@
           aria-label="Life cover up to age"
           aria-describedby="basic-addon1"
           th:field="*{age}"
+          id="age"
         />
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="paymentTenurespan"
+          >Select payment tenure</span
+        >
+        <select
+          class="form-select"
+          aria-label="Select payment tenure"
+          th:field="*{paymentTenure}"
+          id="paymentTenure"
+        >
+          <option value="5" selected>5 years</option>
+          <option value="10">10 years</option>
+          <option value="20">20 years</option>
+          <option value="40">40 years</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="paymentfreqspan"
+          >Select payment tenure</span
+        >
+        <select
+          class="form-select"
+          aria-label="Select payment frequency"
+          th:field="*{paymentFreq}"
+          id="paymentFreq"
+        >
+          <option value="1" selected>Monthly</option>
+          <option value="2">Half Yearly</option>
+          <option value="3">Annual</option>
+        </select>
       </div>
 
       <div class="form-check input-group mb-3">
@@ -248,7 +285,9 @@
         id="comprehensiveCare"
         style="display: none"
       >
-        <span class="input-group-text" id="basic-addon1">Life Cover</span>
+        <span class="input-group-text" id="basic-addon1"
+          >Comprehensive Cover</span
+        >
         <input
           type="text"
           class="form-control"
@@ -256,6 +295,7 @@
           aria-label="Life Cover"
           aria-describedby="basic-addon1"
           th:field="*{comprehensiveCare}"
+          id="comprehensiveCareinput"
         />
       </div>
 
@@ -281,7 +321,9 @@
         id="accidentalDeathCover"
         style="display: none"
       >
-        <span class="input-group-text" id="basic-addon1">Life Cover</span>
+        <span class="input-group-text" id="basic-addon1"
+          >Accidental Death Cover</span
+        >
         <input
           type="text"
           class="form-control"
@@ -289,8 +331,19 @@
           aria-label="Life Cover"
           aria-describedby="basic-addon1"
           th:field="*{accidentalDeathCover}"
+          id="accidentalDeathCoverinput"
         />
       </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Life Cover"
+        aria-label="Life Cover"
+        aria-describedby="basic-addon1"
+        th:field="*{premium}"
+        id="premiumpojo"
+        style="display: none"
+      />
 
       <div
         class="offcanvas offcanvas-end"
@@ -299,7 +352,7 @@
         aria-labelledby="offcanvasRightLabel"
       >
         <div class="offcanvas-header">
-          <h5 id="offcanvasRightLabel">Offcanvas right</h5>
+          <h5 id="offcanvasRightLabel">Policy Details</h5>
           <button
             type="button"
             class="btn-close text-reset"
@@ -308,6 +361,57 @@
           ></button>
         </div>
         <div class="offcanvas-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">Type</th>
+                <th scope="col">Details</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Policy Type</td>
+                <td id="rowpolicytype"></td>
+              </tr>
+              <tr>
+                <td>Life cover up to</td>
+                <td id="rowlifecoverage"></td>
+              </tr>
+              <tr>
+                <td>Accidental death cover</td>
+                <td id="rowdeathcover"></td>
+              </tr>
+              <tr>
+                <td>Comprehensive care</td>
+                <td id="rowcompcare"></td>
+              </tr>
+              <tr>
+                <td>Payment Tenure</td>
+                <td id="rowpaymenttenure"></td>
+              </tr>
+              <tr>
+                <td>Life Cover Amount</td>
+                <td id="rowcoveramount"></td>
+              </tr>
+              <tr>
+                <td>Payment Frequency</td>
+                <td id="rowpymtfrq"></td>
+              </tr>
+              <tr>
+                <td>Premium</td>
+                <td id="rowpremium"></td>
+              </tr>
+              <tr>
+                <td>Tax</td>
+                <td id="rowtax"></td>
+              </tr>
+              <tr>
+                <td>Total Premium</td>
+                <td id="rowttlpremium"></td>
+              </tr>
+            </tbody>
+          </table>
+
           <button class="btn btn-dark" type="submit">Submit</button>
         </div>
       </div>
@@ -319,6 +423,7 @@
           data-bs-toggle="offcanvas"
           data-bs-target="#offcanvasRight"
           aria-controls="offcanvasRight"
+          id="calculatePremium"
         >
           Calculate Premium
         </button>
@@ -361,6 +466,97 @@
           accidentalDeathCover.style.display = "none";
         }
       });
+
+      let calculatePremium = document.getElementById("calculatePremium");
+
+      calculatePremium.addEventListener("click", function handleClick() {
+        let type = document.getElementById("type");
+        let age = document.getElementById("age");
+        let paymentTenure = document.getElementById("paymentTenure");
+        let accidentalDeathCover = document.getElementById(
+          "accidentalDeathCoverinput"
+        );
+        let comprehensiveCare = document.getElementById(
+          "comprehensiveCareinput"
+        );
+        let lifeCoverAmount = document.getElementById("lifeCoverAmount");
+        let paymentFreq = document.getElementById("paymentFreq");
+
+        document.getElementById("rowpolicytype").innerHTML = type.value;
+        document.getElementById("rowlifecoverage").innerHTML = age.value;
+        if (accidentalDeathCover.value > "0") {
+          document.getElementById("rowdeathcover").innerHTML =
+            accidentalDeathCover.value;
+        } else {
+          document.getElementById("rowdeathcover").innerHTML = "0";
+        }
+        document.getElementById("rowpaymenttenure").innerHTML =
+          paymentTenure.value;
+        if (comprehensiveCare.value > "0") {
+          document.getElementById("rowcompcare").innerHTML =
+            comprehensiveCare.value;
+        } else {
+          document.getElementById("rowcompcare").innerHTML = "0";
+        }
+        document.getElementById("rowcoveramount").innerHTML =
+          lifeCoverAmount.value;
+
+        let pyfreq = document.getElementById("rowpymtfrq");
+        if (paymentFreq.value == 1) {
+          pyfreq.innerHTML = "Monthly";
+        } else if (paymentFreq.value == 2) {
+          pyfreq.innerHTML = "Half Yearly";
+        } else {
+          pyfreq.innerHTML = "Yearly";
+        }
+
+        let premium = Math.ceil(
+          (lifeCoverAmount.value * 0.05) / paymentTenure.value / 12
+        );
+        console.log(premium);
+        if (accidentalDeathCover.value > "0") {
+          premium = premium + getAccidentCover(accidentalDeathCover.value);
+        }
+        console.log(premium);
+
+        if (comprehensiveCare.value > "0") {
+          premium = premium + getCompCare(comprehensiveCare.value);
+        }
+        console.log(premium);
+
+        if (paymentFreq.value == 2) {
+          premium = premium * 6;
+        } else if (paymentFreq.value == 3) {
+          premium = premium * 12;
+        }
+
+        let tax = Math.ceil(premium * 0.18);
+        console.log(accidentalDeathCover.value);
+        let premiumaftertax = premium + tax;
+
+        document.getElementById("rowpremium").innerHTML = premium;
+        document.getElementById("rowttlpremium").innerHTML = premiumaftertax;
+        document.getElementById("rowtax").innerHTML = tax;
+        document.getElementById("premiumpojo").value = premiumaftertax;
+      });
+
+      function getAccidentCover(amount) {
+        if (amount > 25000) {
+          let premium = 10;
+          premium = premium + (amount - 25000) * (1 / 5000);
+          return premium;
+        }
+        return 10;
+      }
+
+      function getCompCare(amount) {
+        if (amount > 200000) {
+          let premium = 80;
+          premium = premium + (amount - 200000) * (4 / 3000);
+          return premium;
+        }
+        return 80;
+      }
     </script>
   </body>
 </html>
