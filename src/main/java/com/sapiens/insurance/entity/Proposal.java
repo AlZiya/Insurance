@@ -28,17 +28,23 @@ public class Proposal {
     private String type;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
-    private boolean tobaccoConsumption ;
-    private double annualIncome ;
+    private boolean tobaccoConsumption;
+    private double annualIncome;
     @Max(30000000)
     @Min(0)
-    private  double lifeCoverAmount ;
+    private double lifeCoverAmount;
     @Max(100)
     @Min(1)
-    private  int age ;
+    private int age;
     private int status;
     private String submittedBy;
     private String policyNumber;
+    private double premium;
+    private boolean topUp;
+    private boolean accidentalCover;
+    private double accidentalDeathCover;
+    private boolean care;
+    private double comprehensiveCare;
 
 }
 //For term insurance, obtain the input like First name & Last name, DOB, E-Mail id, mobile number, gender, do you consume tobacco?

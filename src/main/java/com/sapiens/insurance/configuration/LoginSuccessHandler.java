@@ -24,7 +24,8 @@ public class LoginSuccessHandler extends SavedRequestAwareAuthenticationSuccessH
         if (userDetails.getAuthorities().contains(new SimpleGrantedAuthority("ADMIN"))) {
             redirectURL = "adminDashboard";
         } else {
-            redirectURL = "dashboard";}
+            redirectURL = "dashboard";
+        }
 
         response.sendRedirect(redirectURL);
 

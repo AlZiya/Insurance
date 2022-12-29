@@ -86,7 +86,10 @@
     </td>
     <td th:text="${user.type}" />
     <td th:text="${user.dob}" />
-    <td th:text="${user.tobaccoConsumption}" />
+    <td>
+      <span th:if="${user.tobaccoConsumption == true}">Yes</span>
+      <span th:if="${user.tobaccoConsumption == false}">No</span>
+    </td>
     <td th:text="${user.annualIncome}" />
     <td th:text="${user.lifeCoverAmount}" />
     <td th:text="${user.age}" />
