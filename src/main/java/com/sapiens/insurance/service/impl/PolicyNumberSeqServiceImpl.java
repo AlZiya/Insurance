@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.Optional;
 
 @Service
-@Transactional(rollbackOn = {Exception.class})
+@Transactional(rollbackOn = { Exception.class })
 public class PolicyNumberSeqServiceImpl implements PolicyNumberSeqService {
 
     @Autowired
@@ -19,7 +19,7 @@ public class PolicyNumberSeqServiceImpl implements PolicyNumberSeqService {
     private static String policyNumber = "policy-";
 
     @Override
-    @Transactional(rollbackOn = {Exception.class})
+    @Transactional(rollbackOn = { Exception.class })
     synchronized public String getPolicyNumber() {
         Optional<PolicyNumberSequence> policyNumberSequence = policyNumberRepository.findById(1l);
         if (policyNumberSequence.isPresent()) {

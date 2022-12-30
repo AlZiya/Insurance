@@ -17,7 +17,6 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true, jsr250Enabled = true)
 public class AuthConfig {
 
-
     @Autowired
     private UserAuthDetailsService userAuthDetailsService;
 
@@ -46,14 +45,16 @@ public class AuthConfig {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.DELETE)
                 .hasRole("ADMIN")
-                .antMatchers("/admin/**", "/adminDashboard", "/adminCancelled", "/adminApproved", "/proposalStatus", "/deleteProposal"
-                        , "/proposalUpdatePage/**", "/proposalUpdate")
+                .antMatchers("/admin/**", "/adminDashboard", "/adminCancelled", "/adminApproved", "/proposalStatus",
+                        "/deleteProposal", "/proposalUpdatePage/**", "/proposalUpdate")
                 .hasAnyAuthority("ADMIN")
-                .antMatchers("/user/**", "/dashboard", "/submitProposal", "/submitProposalv1/**", "/appliedProposals", "/payment")
+                .antMatchers("/user/**", "/dashboard", "/submitProposal", "/submitProposalv1/**", "/appliedProposals",
+                        "/payment")
                 .hasAnyAuthority("USER")
                 .antMatchers("/login/**", "/register/**", "/registerUser/**")
                 .permitAll()
-                .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico", "/swagger-ui.html/**", "/swagger-ui/**")
+                .antMatchers("/css/**", "/js/**", "/img/**", "/lib/**", "/favicon.ico", "/swagger-ui.html/**",
+                        "/swagger-ui/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated()

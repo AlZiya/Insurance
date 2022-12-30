@@ -15,19 +15,18 @@ public interface ProposalRepository extends JpaRepository<Proposal, Long> {
     List<Proposal> getByStatus(int status);
 
     @Modifying
-    @Transactional(rollbackOn = {Exception.class})
+    @Transactional(rollbackOn = { Exception.class })
     @Query("update proposal p set p.status = :status where p.id= :id")
     int updateStatus(@Param("status") int status, @Param("id") long id);
 
     @Modifying
-    @Transactional(rollbackOn = {Exception.class})
+    @Transactional(rollbackOn = { Exception.class })
     @Query("delete proposal p where p.id= :id")
     int deleteProposal(@Param("id") long id);
 
     @Modifying
-    @Transactional(rollbackOn = {Exception.class})
+    @Transactional(rollbackOn = { Exception.class })
     @Query("update proposal p set p.policyNumber = :policyNumber where p.id= :id")
     int updatePolicyNumber(@Param("id") long id, @Param("policyNumber") String policyNumber);
-
 
 }

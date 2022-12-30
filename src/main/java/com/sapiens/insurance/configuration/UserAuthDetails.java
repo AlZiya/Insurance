@@ -59,5 +59,4 @@ public class UserAuthDetails implements UserDetails {
         return user.getFirstName();
     }
 
-
 }

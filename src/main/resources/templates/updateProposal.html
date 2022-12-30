@@ -1,137 +1,321 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-            crossorigin="anonymous"></script>
-    <title>Dashboard</title>
-</head>
-<body>
-
-<!-- nav bar-->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container-fluid">
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+      crossorigin="anonymous"
+    ></script>
+    <title>Update Proposal</title>
+  </head>
+  <body>
+    <!-- nav bar-->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container-fluid">
         <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" th:href="@{/logout}">Log out</a>
-                </li>
-            </ul>
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                aria-current="page"
+                th:href="@{/adminDashboard}"
+                >Home</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" th:href="@{/logout}">Log out</a>
+            </li>
+          </ul>
         </div>
-    </div>
-</nav>
+      </div>
+    </nav>
 
-
-<!-- proposal form-->
-<form method="post" th:object="${proposal}" th:action="@{/proposalUpdate}">
-
-    <input type="number" th:field="*{id}" hidden="hidden">
-
-    <div class="input-group mb-3">
+    <!-- proposal form-->
+    <form method="post" th:object="${proposal}" th:action="@{/proposalUpdate}">
+      <input type="number" th:field="*{id}" hidden="hidden" />
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">First Name</span>
-        <input type="text" class="form-control" placeholder="First Name" aria-label="First Name"
-               aria-describedby="basic-addon1" th:field="*{firstName}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="First Name"
+          aria-label="First Name"
+          aria-describedby="basic-addon1"
+          th:field="*{firstName}"
+          pattern="^[a-zA-Z\\s]*$"
+          oninvalid="this.setCustomValidity('*Please enter valid First Name')"
+          onchange="try{setCustomValidity('')}catch(e){}"
+          oninput="setCustomValidity(' ')"
+          minlength="3"
+          required
+        />
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Last Name</span>
-        <input type="text" class="form-control" placeholder="Last Name" aria-label="Last Name"
-               aria-describedby="basic-addon1" th:field="*{lastName}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Last Name"
+          aria-label="Last Name"
+          aria-describedby="basic-addon1"
+          th:field="*{lastName}"
+          pattern="^[a-zA-Z\\s]*$"
+          oninvalid="this.setCustomValidity('*Please enter valid Last Name')"
+          onchange="try{setCustomValidity('')}catch(e){}"
+          oninput="setCustomValidity(' ')"
+          minlength="3"
+          required
+        />
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Email</span>
-        <input type="text" class="form-control" placeholder="Email" aria-label="Email"
-               aria-describedby="basic-addon1" th:field="*{email}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Email"
+          aria-label="Email"
+          aria-describedby="basic-addon1"
+          th:field="*{email}"
+          pattern="^[a-zA-Z0-9.!#$%&+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$"
+          onchange="try{setCustomValidity('')}catch(e){}"
+          oninput="setCustomValidity(' ')"
+          oninvalid="this.setCustomValidity('*Please enter valid Email')"
+          required
+        />
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Mobile</span>
-        <input type="text" class="form-control" placeholder="Mobile" aria-label="Mobile"
-               aria-describedby="basic-addon1" th:field="*{mobile}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Mobile"
+          aria-label="Mobile"
+          aria-describedby="basic-addon1"
+          th:field="*{mobile}"
+          min="6000000000"
+          max="9999999999"
+          minlength="10"
+          maxlength="10"
+        />
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Gender</span>
-        <select class="form-select" aria-label="Select Gender" th:field="*{gender}">
-            <option value="1" selected>Male</option>
-            <option value="2">Female</option>
-            <option value="3">Other</option>
+        <select
+          class="form-select"
+          aria-label="Select Gender"
+          th:field="*{gender}"
+        >
+          <option value="1" selected>Male</option>
+          <option value="2">Female</option>
+          <option value="3">Other</option>
         </select>
-    </div>
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Policy Type</span>
-        <select class="form-select" aria-label="Select Policy Type" th:field="*{type}">
-            <option value="Term insurance" selected>Term Insurance Policy</option>
-            <option value="Whole Life insurance Policy">Whole Life insurance Policy</option>
-            <option value="Money Back Policy">Money Back Policy</option>
-            <option value="Endowment Policy">Endowment Policy</option>
-
+        <select
+          class="form-select"
+          aria-label="Select Policy Type"
+          th:field="*{type}"
+          id="type"
+        >
+          <option value="Term insurance" selected>Term Insurance Policy</option>
+          <option value="Whole Life insurance Policy">
+            Whole Life insurance Policy
+          </option>
+          <option value="Money Back Policy">Money Back Policy</option>
+          <option value="Endowment Policy">Endowment Policy</option>
         </select>
-    </div>
+      </div>
 
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Date of Birth</span>
-        <input type="date" class="form-control" placeholder="Date of Birth" aria-label="Date of Birth"
-               aria-describedby="basic-addon1" th:field="*{dob}">
-    </div>
+        <input
+          type="date"
+          class="form-control"
+          placeholder="Date of Birth"
+          aria-label="Date of Birth"
+          aria-describedby="basic-addon1"
+          th:field="*{dob}"
+          id="dob"
+        />
+      </div>
 
-
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Annual Income</span>
-        <input type="text" class="form-control" placeholder="Annual Income" aria-label="Annual Income"
-               aria-describedby="basic-addon1" th:field="*{annualIncome}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Annual Income"
+          aria-label="Annual Income"
+          aria-describedby="basic-addon1"
+          th:field="*{annualIncome}"
+          min="1"
+          required
+        />
+      </div>
 
-
-    <div class="input-group mb-3">
+      <div class="input-group mb-3">
         <span class="input-group-text" id="basic-addon1">Life Cover</span>
-        <input type="text" class="form-control" placeholder="Life Cover" aria-label="Life Cover"
-               aria-describedby="basic-addon1" th:field="*{lifeCoverAmount}">
-    </div>
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Life Cover"
+          aria-label="Life Cover"
+          aria-describedby="basic-addon1"
+          th:field="*{lifeCoverAmount}"
+          id="lifeCoverAmount"
+          required
+          min="1"
+        />
+      </div>
 
-    <div class="input-group mb-3">
-        <span class="input-group-text" id="basic-addon1">Life cover up to age</span>
-        <input type="text" class="form-control" placeholder="Life cover up to age" aria-label="Life cover up to age"
-               aria-describedby="basic-addon1" th:field="*{age}">
-    </div>
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="basic-addon1"
+          >Life cover up to age</span
+        >
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Life cover up to age"
+          aria-label="Life cover up to age"
+          aria-describedby="basic-addon1"
+          th:field="*{age}"
+          id="age"
+          required
+          min="10"
+        />
+      </div>
 
-    <div class="form-check input-group mb-3">
-        <input class="form-check-input" type="checkbox" value="true" id="flexCheckChecked" checked
-               th:field="*{tobaccoConsumption}">
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="paymentTenurespan"
+          >Select payment tenure</span
+        >
+        <select
+          class="form-select"
+          aria-label="Select payment tenure"
+          th:field="*{paymentTenure}"
+          id="paymentTenure"
+        >
+          <option value="5" selected>5 years</option>
+          <option value="10">10 years</option>
+          <option value="20">20 years</option>
+          <option value="40">40 years</option>
+        </select>
+      </div>
+
+      <div class="input-group mb-3">
+        <span class="input-group-text" id="paymentfreqspan"
+          >Select payment tenure</span
+        >
+        <select
+          class="form-select"
+          aria-label="Select payment frequency"
+          th:field="*{paymentFreq}"
+          id="paymentFreq"
+        >
+          <option value="1" selected>Monthly</option>
+          <option value="2">Half Yearly</option>
+          <option value="3">Annual</option>
+        </select>
+      </div>
+
+      <div class="form-check input-group mb-3">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="true"
+          id="flexCheckChecked"
+          th:field="*{tobaccoConsumption}"
+        />
         <label class="form-check-label" for="flexCheckChecked">
-            Do you consume tobacco?
+          Do you consume tobacco?
         </label>
-    </div>
+      </div>
 
-    <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-dark" type="submit">Submit</button>
-    </div>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Life Cover"
+        aria-label="Life Cover"
+        aria-describedby="basic-addon1"
+        th:field="*{premium}"
+        id="premiumpojo"
+        style="display: none"
+      />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Life Cover"
+        aria-label="Life Cover"
+        aria-describedby="basic-addon1"
+        th:field="*{accidentalDeathCover}"
+        id="accidentalDeathCoverinput"
+        min="0"
+        style="display: none"
+      />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="true"
+        id="t3check"
+        th:field="*{accidentalCover}"
+        style="display: none"
+      />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="Life Cover"
+        aria-label="Life Cover"
+        aria-describedby="basic-addon1"
+        th:field="*{comprehensiveCare}"
+        id="comprehensiveCareinput"
+        min="0"
+        style="display: none"
+      />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="true"
+        id="t2check"
+        th:field="*{care}"
+        style="display: none"
+      />
+      <input
+        class="form-check-input"
+        type="checkbox"
+        value="true"
+        id="t1check"
+        th:field="*{topUp}"
+        style="display: none"
+      />
 
-</form>
-
-</body>
+      <button class="btn btn-dark" type="submit">Submit</button>
+    </form>
+  </body>
 </html>
