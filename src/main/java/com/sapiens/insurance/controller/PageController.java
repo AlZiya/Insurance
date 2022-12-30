@@ -45,7 +45,6 @@ public class PageController {
         return "register";
     }
 
-
     @GetMapping("/login")
     public String getLoginPage() {
         return "login";
@@ -75,7 +74,6 @@ public class PageController {
         return "adminApproved";
     }
 
-
     @PostMapping("/submitProposal")
     public String submitProposal(@ModelAttribute Proposal proposal, Authentication authentication) {
         System.out.println(proposal);
@@ -88,7 +86,8 @@ public class PageController {
     }
 
     @PostMapping("/submitProposalv1")
-    public String submitProposal(@ModelAttribute Proposal proposal, Authentication authentication, @RequestParam long id) {
+    public String submitProposal(@ModelAttribute Proposal proposal, Authentication authentication,
+            @RequestParam long id) {
         System.out.println(proposal);
         Proposal response1 = proposalRepository.getById(id);
         UserAuthDetails details = (UserAuthDetails) authentication.getPrincipal();

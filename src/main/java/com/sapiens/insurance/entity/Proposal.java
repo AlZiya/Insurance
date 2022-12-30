@@ -50,5 +50,7 @@ public class Proposal {
     private int paymentFreq;
 
 }
-//For term insurance, obtain the input like First name & Last name, DOB, E-Mail id, mobile number, gender, do you consume tobacco?
-// annual income, life cover amount(up to 3 crores), life cover up to age (range of age can be up to 100 years)
+// For term insurance, obtain the input like First name & Last name, DOB, E-Mail
+// id, mobile number, gender, do you consume tobacco?
+// annual income, life cover amount(up to 3 crores), life cover up to age (range
+// of age can be up to 100 years)
