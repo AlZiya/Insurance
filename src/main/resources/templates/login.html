@@ -1,35 +1,53 @@
 <html lang="en" xmlns:th="http://thymeleaf.org">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="css/register.css">
-</head>
-<body>
-<form th:action="@{/login}" method="post">
-<section>
-  <h1>Login</h1>
-  <div class="login-form">
-    <h4>Username</h4>
-    <div class="username-input">
-      <i class="fas fa-user"></i>
-      <input type="text" placeholder="Type your username" name="username" id="username">
-    </div>
-    <h4>Password</h4>
-    <div class="password-input">
-      <i class="fas fa-lock"></i>
-      <input type="text" placeholder="Type your password" name="password" id="password">
-    </div>
-    <p>Forgot password?</p>
-  </div>
-  <button class="login-btn" type="submit">
-    LOGIN
-  </button>
-  <div class="alternative-signup">
-    <p>Not a member? <a th:href="@{/register}">Sign-up</a></p>
-  </div>
-</section>
-</form>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="css/register.css" />
+  </head>
+  <body>
+    <form th:action="@{/login}" method="post">
+      <section>
+        <h1>Login</h1>
+        <div class="login-form">
+          <h4>Username</h4>
+          <div class="username-input">
+            <i class="fas fa-user"></i>
+            <input
+              type="text"
+              placeholder="Type your email"
+              name="username"
+              id="username"
+              pattern="^[a-zA-Z0-9.!#$%&+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)$"
+              onchange="try{setCustomValidity('')}catch(e){}"
+              oninput="setCustomValidity(' ')"
+              oninvalid="this.setCustomValidity('*Please enter valid Email')"
+              required
+            />
+          </div>
+          <h4>Password</h4>
+          <div class="password-input">
+            <i class="fas fa-lock"></i>
+            <input
+              type="password"
+              placeholder="Type your password"
+              name="password"
+              id="password"
+              pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$"
+              onchange="try{setCustomValidity('')}catch(e){}"
+              oninput="setCustomValidity(' ')"
+              oninvalid="this.setCustomValidity('*Your password must contain at least 1 uppercase, 1 lowercase letter, 1 no. digit and 1 special character.')"
+              required
+            />
+          </div>
+          <p>Forgot password?</p>
+        </div>
+        <button class="login-btn" type="submit">Login</button>
+        <div class="alternative-signup">
+          <p>Not a member? <a th:href="@{/register}">Sign-up</a></p>
+        </div>
+      </section>
+    </form>
+  </body>
 </html>
